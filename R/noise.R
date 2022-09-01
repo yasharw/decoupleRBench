@@ -45,6 +45,12 @@ net_noise <- function(network, mode='add', perc=0.1, source='source',
         tbl[[source]] <- rep(name_source, length(sampled))
         tbl[[target]] <- sampled
         tbl <- bind_rows(df, tbl)
+
+        # Ensure that table is filled out
+        # PC doesn't use these metrics
+        tbl$confidence <- 'A'
+        tbl$likelihood <- 1
+
         tbl
       } else if (mode == 'del') {
         # Sample n edges to del
